@@ -135,6 +135,10 @@ header h2 {
   background: white;
 }
 
+.song.active{
+  color: white;
+  background-color: var(--primary-color);
+}
 .song {
   display: flex;
   align-items: center;
@@ -144,7 +148,9 @@ header h2 {
   border-radius: 5px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
-
+.song:active{
+  opacity: 0.8;
+}
 .song.active {
   background-color: var(--primary-color);
 }
