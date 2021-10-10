@@ -46,6 +46,12 @@ const app = {
       path: "/MusicPlayer/music/Takeaway.mp3",
     },
     {
+      name: "Muốn nói với em",
+      singer: "TTeam",
+      img: "https://cdnmedia.thethaovanhoa.vn/Upload/O5NP4aFt6GVwE7JTFAOaA/files/2020/06/thai-vu-muon-noi-voi-em%20(3).jpg",
+      path: "/MusicPlayer/music/y2mate.com - TTeam  MUỐN NÓI VỚI EM Official MV KIỀU MINH TUẤN  LÊ CHI BLACKBI.mp3",
+    },
+    {
       name: "2 million year",
       singer: "Đen",
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIXaDDnjZoh39iJDltDplpPd657YtDd4rE6w&usqp=CAU",
@@ -80,6 +86,42 @@ const app = {
       singer: "...",
       img: "https://cdn.tgdd.vn/hoi-dap/1313875/lo-fi-la-gi-cach-de-nhan-biet-ban-dang-nghe-loai-nhac-nay1.jpg",
       path: "/MusicPlayer/music/y2mate.com - Giọt nước mắt anh đã tuôn rơi rồi  NGƯỜI MÌNH YÊU CHƯA CHẮC ĐÃ YÊU MÌNH  GIL LÊ.mp3",
+    },
+    {
+      name: "BƯỚC QUA MÙA CÔ ĐƠN",
+      singer: "Vũ",
+      img: "https://static2.yan.vn/YanNews/202012/202012100650387133-32ba9754-912d-40ca-8edf-be27c7f3d19f.jpeg",
+      path: "/MusicPlayer/music/y2mate.com - BƯỚC QUA MÙA CÔ ĐƠN  Vũ Official MV.mp3",
+    },
+    {
+      name: "Trốn Tìm",
+      singer: "Đen",
+      img: "https://i1.sndcdn.com/artworks-SulYyzvm47QgVmqH-yL2nCw-t500x500.jpg",
+      path: "/MusicPlayer/music/y2mate.com - Đen  Trốn Tìm ft MTV band MV.mp3",
+    },
+    {
+      name: "NƠI TA CHỜ EM",
+      singer: "1ST SINGLE",
+      img: "https://cdn.vietnammoi.vn/stores/news_dataimages/vantt/052017/18/14/3835_kaity-1-5718-1494903982.jpg",
+      path: "/MusicPlayer/music/y2mate.com - NƠI TA CHỜ EM OFFICIAL MV 4K  WILL FT KAITY  1ST SINGLE  EM CHƯA 18 OST.mp3",
+    },
+    {
+      name: "Âm thầm bên em",
+      singer: "Sơn tùng MTP",
+      img: "https://vietthanh.vn/image/catalog/sheet-nhac/28ths05.jpg",
+      path: "/MusicPlayer/music/y2mate.com - Âm Thầm Bên Em Lofi Ver By Besu  Sơn Tùng MTP.mp3",
+    },
+    {
+      name: "Hãy trao cho anh",
+      singer: "Sơn tùng MTP",
+      img: "https://static.yeah1.com/uploads/editors/47/2021/01/08/gQ66Xpnfhbbvs2ZE49YK2Sn8O599bgA5IrapVGjN.jpeg",
+      path: "/MusicPlayer/music/y2mate.com - SƠN TÙNG MTP  HÃY TRAO CHO ANH ft Snoop Dogg  Official MV.mp3",
+    },
+    {
+      name: "Senorita",
+      singer: "Shawn Mendes , Camila Cabello",
+      img: "https://dichnghiatienganh.com/wp-content/uploads/2020/04/senorita-la-gi.jpg",
+      path: "/MusicPlayer/music/y2mate.com - Shawn Mendes Camila Cabello  Señorita.mp3",
     },
   ],
   render: function () {
@@ -149,18 +191,18 @@ const app = {
         app.isPlaying = false;
         player.classList.remove("playing");
         cdThumbAnimate.pause();
-      }; 
+      };
       progress.onchange = function (e) {
         const seekTime = (audio.duration / 100) * e.target.value;
         audio.currentTime = seekTime;
       };
-     audio.ontimeupdate = function () {
+      audio.ontimeupdate = function () {
         if (audio.duration) {
           const ProgressPercent = Math.floor(
             (audio.currentTime / audio.duration) * 100
           );
-          progress.value = ProgressPercent;  
-        }     
+          progress.value = ProgressPercent;
+        }
       };
     };
     nextBtn.onclick = function () {
@@ -208,6 +250,20 @@ const app = {
           app.loadCurrentSong();
           app.render();
           audio.play();
+
+          audio.ontimeupdate = function () {
+            if (audio.duration) {
+              const ProgressPercent = Math.floor(
+                (audio.currentTime / audio.duration) * 100
+              );
+              progress.value = ProgressPercent;
+            }
+          };
+
+          progress.onchange = function (e) {
+            const seekTime = (audio.duration / 100) * e.target.value;
+            audio.currentTime = seekTime;
+          };
         }
       }
     };
