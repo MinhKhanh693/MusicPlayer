@@ -30,55 +30,55 @@ const app = {
     {
       name: "Faded",
       singer: "Alan Walker",
-      img: "https://i.ytimg.com/an_webp/60ItHLz5WEA/mqdefault_6s.webp?du=3000&sqp=CLCohosG&rs=AOn4CLCagfORqn2FC8XeQ_crmnbRy6-akw",
+      img: "https://upload.wikimedia.org/wikipedia/vi/d/da/Alan_Walker_-_Faded.png",
       path: "/MusicPlayer/music/Faded.mp3",
     },
     {
       name: "Until You",
       singer: "Shayne Ward",
-      img: "https://i.ytimg.com/an_webp/e9oxsf3NWMs/mqdefault_6s.webp?du=3000&sqp=CLWShosG&rs=AOn4CLA97SBM7XBAvsxWvD59xLxyvt8GZQ",
+      img: "https://avatar-ex-swe.nixcdn.com/song/2018/01/29/b/d/d/e/1517189710456_640.jpg",
       path: "/MusicPlayer/music/UntilYou.mp3",
     },
     {
       name: "Takeaway",
       singer: "The Chansmokers,...",
-      img: "https://i.ytimg.com/an_webp/qNLjSqT48sg/mqdefault_6s.webp?du=3000&sqp=CIjrhYsG&rs=AOn4CLB1lomYdYH0xgEI6czbH2djZ3WfMA",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyoPp_7q97KQv_tlUbBFDWkn6L82ABYqtqNA&usqp=CAU",
       path: "/MusicPlayer/music/Takeaway.mp3",
     },
     {
       name: "2 million year",
       singer: "Đen",
-      img: "https://i.ytimg.com/vi/LSMDNL4n0kM/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAQDmYpBHUeUvVKlnXYVx7PTAEeTQ",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIXaDDnjZoh39iJDltDplpPd657YtDd4rE6w&usqp=CAU",
       path: "/MusicPlayer/music/y2mate.com - Đen  hai triệu năm ft Biên mv.mp3",
     },
     {
       name: "Mistletoe - cover",
       singer: "Quỳnh Lâm Nha",
-      img: "https://i.ytimg.com/an_webp/P8C7-cC0zKw/mqdefault_6s.webp?du=3000&sqp=CKTbhosG&rs=AOn4CLBiIuV3BhXfuilp9d4h2emaluNL_g",
+      img: "https://revelogue.com/wp-content/uploads/2021/01/justin-bieber-bat-dau-e1611506032777.jpg",
       path: "/MusicPlayer/music/y2mate.com - Cây tầm gửi   Quỳnh Lâm Nha  Cover  Tik Tok   Mistletoe  琼琳呀 .mp3",
     },
     {
       name: "Close",
       singer: "The Chansmokers",
-      img: "https://i.ytimg.com/an_webp/PT2_F-1esPk/mqdefault_6s.webp?du=3000&sqp=CM7uhosG&rs=AOn4CLBhB4aw-EFmcqbETAyHAUlLJGWdiQ",
+      img: "https://avatar-ex-swe.nixcdn.com/song/2017/10/04/a/4/8/6/1507109116689_640.jpg",
       path: "/MusicPlayer/music/y2mate.com - The Chainsmokers  Closer Lyric ft Halsey.mp3",
     },
     {
       name: "See You Again",
       singer: "Charlie Puth",
-      img: "https://i.ytimg.com/an_webp/cPyovQwFmhE/mqdefault_6s.webp?du=3000&sqp=CMHQhosG&rs=AOn4CLBxRSMjgmHYH3WtzIyg1GLfwKNTxw",
+      img: "https://dichthuathanu.com/wp-content/uploads/2020/09/hqdefault-2.jpg",
       path: "/MusicPlayer/music/y2mate.com - Wiz Khalifa  See You Again Lyrics ft Charlie Puth.mp3",
     },
     {
       name: "Sinh ra đã là thứ đối lập nhau",
       singer: "Dalab",
-      img: "https://i.ytimg.com/an_webp/redFrGBZoJY/mqdefault_6s.webp?du=3000&sqp=CL71hosG&rs=AOn4CLDmqWhsenzI-DdYE_O-Ud2GpsSv4A",
+      img: "https://i.ytimg.com/vi/eb2JHVBVKhs/maxresdefault.jpg",
       path: "/MusicPlayer/music/y2mate.com - Sinh Ra Đã Là Thứ Đối Lập Nhau  Emcee L Da LAB ft Badbies Official MV.mp3",
     },
     {
       name: "Nhạc buồn vl",
       singer: "...",
-      img: "https://i.ytimg.com/vi/Tc0rQSPVk-U/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDz687cKGvkb5bsQOBNcwmtzYwGzg",
+      img: "https://cdn.tgdd.vn/hoi-dap/1313875/lo-fi-la-gi-cach-de-nhan-biet-ban-dang-nghe-loai-nhac-nay1.jpg",
       path: "/MusicPlayer/music/y2mate.com - Giọt nước mắt anh đã tuôn rơi rồi  NGƯỜI MÌNH YÊU CHƯA CHẮC ĐÃ YÊU MÌNH  GIL LÊ.mp3",
     },
   ],
@@ -149,18 +149,18 @@ const app = {
         app.isPlaying = false;
         player.classList.remove("playing");
         cdThumbAnimate.pause();
+      }; 
+      progress.onchange = function (e) {
+        const seekTime = (audio.duration / 100) * e.target.value;
+        audio.currentTime = seekTime;
       };
-      audio.ontimeupdate = function () {
+     audio.ontimeupdate = function () {
         if (audio.duration) {
           const ProgressPercent = Math.floor(
             (audio.currentTime / audio.duration) * 100
           );
-          progress.value = ProgressPercent;
-        }
-      };
-      progress.onchange = function (e) {
-        const seekTime = (audio.duration / 100) * e.target.value;
-        audio.currentTime = seekTime;
+          progress.value = ProgressPercent;  
+        }     
       };
     };
     nextBtn.onclick = function () {
@@ -189,7 +189,7 @@ const app = {
       app.setConfig("isRandom", app.isRandom);
     };
     audio.onended = function () {
-      if (isRpeat) {
+      if (app.isRpeat) {
         audio.play();
       } else {
         nextBtn.click();
@@ -216,6 +216,7 @@ const app = {
     heading.textContent = this.currentSong.name;
     cdThumb.style.backgroundImage = `url('${this.currentSong.img}')`;
     audio.src = this.currentSong.path;
+
     audio.onplay = function () {
       app.isPlaying = true;
       player.classList.add("playing");
