@@ -21,6 +21,7 @@ const app = {
   isPlaying: false,
   isRandom: false,
   isRpeat: false,
+
   config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
   setConfig: function (key, value) {
     this.config[key] = value;
@@ -32,6 +33,42 @@ const app = {
       singer: "Alan Walker",
       img: "https://upload.wikimedia.org/wikipedia/vi/d/da/Alan_Walker_-_Faded.png",
       path: "/MusicPlayer/music/Faded.mp3",
+    },
+    {
+      name: "Anh Đếch Cần Gì Nhiều Ngoài Em",
+      singer: "Đen",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIXaDDnjZoh39iJDltDplpPd657YtDd4rE6w&usqp=CAU",
+      path: "/MusicPlayer/music/y2mate.com - Đen  Anh Đếch Cần Gì Nhiều Ngoài Em ft Vũ Thành Đồng MV_320kbps.mp3",
+    },
+    {
+      name: "Ngày khác lạ",
+      singer: "Đen",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIXaDDnjZoh39iJDltDplpPd657YtDd4rE6w&usqp=CAU",
+      path: "/MusicPlayer/music/y2mate.com - Đen  Ngay Khac La ft Giang Pham Triple D MV_320kbps.mp3",
+    },
+    {
+      name: "Đi Theo Bóng Mặt Trời",
+      singer: "Đen",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIXaDDnjZoh39iJDltDplpPd657YtDd4rE6w&usqp=CAU",
+      path: "/MusicPlayer/music/y2mate.com - Đen  Đi Theo Bóng Mặt Trời ft Tăng Ngân Hà Maius Philharmonic_320kbps.mp3",
+    },
+    {
+      name: "Ta Cứ Đi Cùng Nhau",
+      singer: "Đen",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIXaDDnjZoh39iJDltDplpPd657YtDd4rE6w&usqp=CAU",
+      path: "/MusicPlayer/music/y2mate.com - Đen  Ta Cứ Đi Cùng Nhau ft Linh Cáo Prod by  i Tễu MV_320kbps.mp3",
+    },
+    {
+      name: "Cơn Mơ Băng Giá",
+      singer: "Noo Phước Thịnh",
+      img: "https://suckhoedoisong.qltns.mediacdn.vn/2015/1413943827-noo-3-1423842695674.jpg",
+      path: "/MusicPlayer/music/y2mate.com - Noo Phước Thịnh COVER Cơn Mơ Băng Giá LIVE  Mây in the Nest_320kbps.mp3",
+    },
+    {
+      name: "Chạm khẽ tim anh một chút thôi",
+      singer: "Noo Phước Thịnh",
+      img: "https://suckhoedoisong.qltns.mediacdn.vn/2015/1413943827-noo-3-1423842695674.jpg",
+      path: "/MusicPlayer/music/y2mate.com - Chạm khẽ tim anh một chút thôi Noo Phước Thịnh  Lyric video by Eunn_320kbps.mp3.webm",
     },
     {
       name: "Until You",
@@ -124,6 +161,21 @@ const app = {
       path: "/MusicPlayer/music/y2mate.com - Shawn Mendes Camila Cabello  Señorita.mp3",
     },
   ],
+
+  shuffle : function(array) {
+    let currentIndex = array.length,  randomIndex;
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) { 
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+    return array;
+  },
+
   render: function () {
     let htmls = this.songs.map((item, index) => {
       return `
@@ -319,6 +371,7 @@ const app = {
     app.isRpeat = app.config.isRpeat;
   },
   start: function () {
+    this.shuffle(app.songs);
     this.defaultProperties();
     this.loadCurrentSong();
     this.loadConfig();
