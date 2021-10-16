@@ -21,6 +21,7 @@ const app = {
   isPlaying: false,
   isRandom: false,
   isRpeat: false,
+  usedMusic: [],
 
   config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
   setConfig: function (key, value) {
@@ -119,6 +120,12 @@ const app = {
       path: "/MusicPlayer/music/y2mate.com - Sinh Ra Đã Là Thứ Đối Lập Nhau  Emcee L Da LAB ft Badbies Official MV.mp3",
     },
     {
+      name: "Nước Mắt Em Lau Bằng Tình Yêu Mới",
+      singer: "Dalab",
+      img: "https://i.ytimg.com/vi/eb2JHVBVKhs/maxresdefault.jpg",
+      path: "/MusicPlayer/music/y2mate.com - Nuoc Mat Em Lau Bang Tinh Yeu Moi  Da LAB ft Toc Tien Official MV_320kbps.mp3",
+    },
+    {
       name: "Nhạc buồn vl",
       singer: "...",
       img: "https://cdn.tgdd.vn/hoi-dap/1313875/lo-fi-la-gi-cach-de-nhan-biet-ban-dang-nghe-loai-nhac-nay1.jpg",
@@ -131,10 +138,22 @@ const app = {
       path: "/MusicPlayer/music/y2mate.com - BƯỚC QUA MÙA CÔ ĐƠN  Vũ Official MV.mp3",
     },
     {
+      name: "LẠ LÙNG",
+      singer: "Vũ",
+      img: "https://static2.yan.vn/YanNews/202012/202012100650387133-32ba9754-912d-40ca-8edf-be27c7f3d19f.jpeg",
+      path: "/MusicPlayer/music/y2mate.com - LẠ LÙNG  Vũ Original_320kbps.mp3",
+    },
+    {
       name: "Trốn Tìm",
       singer: "Đen",
       img: "https://i1.sndcdn.com/artworks-SulYyzvm47QgVmqH-yL2nCw-t500x500.jpg",
       path: "/MusicPlayer/music/y2mate.com - Đen  Trốn Tìm ft MTV band MV.mp3",
+    },
+    {
+      name: "Mười Năm",
+      singer: "Đen",
+      img: "https://i1.sndcdn.com/artworks-SulYyzvm47QgVmqH-yL2nCw-t500x500.jpg",
+      path: "/MusicPlayer/music/y2mate.com - Đen  Mười Năm ft Ngọc Linh MV Lộn Xộn 3_320kbps.mp3",
     },
     {
       name: "NƠI TA CHỜ EM",
@@ -157,21 +176,48 @@ const app = {
     {
       name: "Senorita",
       singer: "Shawn Mendes , Camila Cabello",
-      img: "https://dichnghiatienganh.com/wp-content/uploads/2020/04/senorita-la-gi.jpg",
+      img: "https://static.toiimg.com/thumb/msid-72055553,width-400,resizemode-4/72055553.jpg",
       path: "/MusicPlayer/music/y2mate.com - Shawn Mendes Camila Cabello  Señorita.mp3",
+    },
+    {
+      name: "Khi phải quên đi ",
+      singer: "KHÓI cover",
+      img: "https://vnn-imgs-f.vgcloud.vn/2019/06/05/11/phan-manh-quynh-mv-moi-la-cau-chuyen-that-cua-toi-va-ban-gai-1.jpg",
+      path: "/MusicPlayer/music/y2mate.com - Khi phải quên đi  KHÓI cover_320kbps.mp3"
+    },
+    {
+      name: "Đường Tôi Chở Em Về ",
+      singer: "buitruonglinh x Freak D",
+      img: "https://i1.sndcdn.com/artworks-4Xh2hYcOULz9vJhi-S6U07A-t500x500.jpg",
+      path: "/MusicPlayer/music/y2mate.com - Đường Tôi Chở Em Về Lofi Ver  buitruonglinh x Freak D_320kbps.mp3",
+    },
+    {
+      name: "Có Chàng Trai Viết Lên Cây ",
+      singer: "Phan Mạnh Quỳnh",
+      img: "https://vnn-imgs-f.vgcloud.vn/2019/06/05/11/phan-manh-quynh-mv-moi-la-cau-chuyen-that-cua-toi-va-ban-gai-1.jpg",
+      path: "/MusicPlayer/music/y2mate.com - Có Chàng Trai Viết Lên Cây  Phan Mạnh Quỳnh  AUDIO LYRIC OFFICIAL_320kbps.mp3",
+    },
+    {
+      name: "Nhạt",
+      singer: "Phan Mạnh Quỳnh",
+      img: "https://vnn-imgs-f.vgcloud.vn/2019/06/05/11/phan-manh-quynh-mv-moi-la-cau-chuyen-that-cua-toi-va-ban-gai-1.jpg",
+      path: "/MusicPlayer/music/y2mate.com - NHẠT  Phan Mạnh Quỳnh  AUDIO_320kbps.mp3",
     },
   ],
 
-  shuffle : function(array) {
-    let currentIndex = array.length,  randomIndex;
+  shuffle: function (array) {
+    let currentIndex = array.length,
+      randomIndex;
     // While there remain elements to shuffle...
-    while (currentIndex != 0) { 
+    while (currentIndex != 0) {
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
       // And swap it with the current element.
       [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+        array[randomIndex],
+        array[currentIndex],
+      ];
     }
     return array;
   },
@@ -354,8 +400,14 @@ const app = {
     let newIndex;
     do {
       newIndex = Math.floor(Math.random() * this.songs.length);
-    } while (newIndex === this.currentIndex);
-    this.currentIndex = newIndex;
+    } while (Boolean(app.usedMusic.find((item) => item === newIndex)));
+    if (app.usedMusic.length === app.songs.length) {
+      app.usedMusic = [];
+    } else {
+      app.usedMusic.push(newIndex);
+      this.currentIndex = newIndex;
+    }
+    console.log(app.usedMusic);
     this.loadCurrentSong();
   },
   scrollToActiveSong: function () {
