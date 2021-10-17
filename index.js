@@ -22,7 +22,17 @@ const app = {
   isRandom: false,
   isRpeat: false,
   usedMusic: [],
-
+ cdThumbAnimate : cdThumb.animate(
+    [
+      {
+        transform: "rotate(360deg)",
+      },
+    ],
+    {
+      duration: 10000,
+      iterations: Infinity,
+    }
+  ),
   config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
   setConfig: function (key, value) {
     this.config[key] = value;
@@ -253,19 +263,7 @@ const app = {
   handleEvents: function () {
     const cdWidth = cd.offsetWidth;
 
-    const cdThumbAnimate = cdThumb.animate(
-      [
-        {
-          transform: "rotate(360deg)",
-        },
-      ],
-      {
-        duration: 10000,
-        iterations: Infinity,
-      }
-    );
-
-    cdThumbAnimate.pause();
+    app.cdThumbAnimate.pause();
     document.onscroll = function () {
       const scrollTop = document.documentElement.scrollTop || window.scrollY;
       const newCdWidth = cdWidth - scrollTop;
@@ -283,12 +281,12 @@ const app = {
       audio.onplay = function () {
         app.isPlaying = true;
         player.classList.add("playing");
-        cdThumbAnimate.play();
+        app.cdThumbAnimate.play();
       };
       audio.onpause = function () {
         app.isPlaying = false;
         player.classList.remove("playing");
-        cdThumbAnimate.pause();
+        app.cdThumbAnimate.pause();
       };
       progress.onchange = function (e) {
         const seekTime = (audio.duration / 100) * e.target.value;
@@ -374,12 +372,12 @@ const app = {
     audio.onplay = function () {
       app.isPlaying = true;
       player.classList.add("playing");
-      cdThumbAnimate.play();
+      app.cdThumbAnimate.play();
     };
     audio.onpause = function () {
       app.isPlaying = false;
       player.classList.remove("playing");
-      cdThumbAnimate.pause();
+      app.cdThumbAnimate.pause();
     };
   },
   nextSong: function () {
@@ -407,7 +405,6 @@ const app = {
       app.usedMusic.push(newIndex);
       this.currentIndex = newIndex;
     }
-    console.log(app.usedMusic);
     this.loadCurrentSong();
   },
   scrollToActiveSong: function () {
